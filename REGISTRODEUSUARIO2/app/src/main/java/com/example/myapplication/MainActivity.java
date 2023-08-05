@@ -8,32 +8,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.myapplication.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity {
+
+private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
 
+        //Raiz de gerarquia de vistas
+        setContentView(binding.getRoot());
 
-        EditText editText1;
-        EditText editText2;
-        EditText editAddress;
-        EditText editPassword;
-
-        editText1 = findViewById(R.id.editText1);
-        editText2 = findViewById(R.id.editText2);
-        editAddress = findViewById(R.id.editAddress);
-        editPassword = findViewById(R.id.editPassword);
-
-        Button btnCreate = findViewById(R.id.btnCreate);
-        btnCreate.setOnClickListener(new View.OnClickListener() {
+        //boton crear
+        binding.btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = editText1.getText().toString();
-                String lastname = editText2.getText().toString();
-                String email = editAddress.getText().toString();
-                String pass = editPassword.getText().toString();
+                String name = binding.editText1.getText().toString();
+                String lastname = binding.editText2.getText().toString();
+                String email = binding.editAddress.getText().toString();
+                String pass = binding.editPassword.getText().toString();
 
                 if(name.isEmpty() || lastname.isEmpty() || !email.contains("@") || pass.isEmpty()) {
                     Toast.makeText(getBaseContext(), "Completar campos", Toast.LENGTH_SHORT).show();
@@ -44,8 +40,5 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
-
     }
 }
